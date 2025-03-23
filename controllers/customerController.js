@@ -1,6 +1,7 @@
 import customerModel from "../models/customerModel.js";
 import ErrorHandler from "../utils/ErrorHandler.js";
 import cloudinary from "cloudinary";
+import { isStrongPassword } from "validator";
 import registerModel from "../models/registerModel.js";
 import SaveInCookie from "../utils/SaveInCookie.js";
 import SendMail from "../utils/SendMail.js";
@@ -61,6 +62,14 @@ export const ragisterCustomer = async (req, res, next) => {
         new ErrorHandler(
           406,
           "This Email Id is already Present in Our database."
+        )
+      );
+    }
+    if (!isStrongPassword(password)) {
+      return next(
+        new ErrorHandler(
+          406,
+          "Password should contain at least one lowercase letter, one uppercase letter, one number, one special character, and have a minimum length of 8 characters."
         )
       );
     }

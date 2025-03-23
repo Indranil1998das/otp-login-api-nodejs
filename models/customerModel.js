@@ -21,10 +21,6 @@ const customerSchema = new mongoose.Schema({
     type: String,
     required: true,
     select: false,
-    validator: [
-      validator.isStrongPassword,
-      "Password should contain at least one lowercase letter, one uppercase letter, one number, one special character, and have a minimum length of 8 characters.",
-    ],
   },
   profilePhoto: {
     public_id: {
